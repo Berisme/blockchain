@@ -32,3 +32,12 @@ app.get("/product/:id", (req, res) => {
 });
 
 app.listen(3000);
+const path = require("path");
+
+// cho phép dùng file tĩnh
+app.use(express.static(__dirname));
+
+// route trang web
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
