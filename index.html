@@ -58,7 +58,7 @@ async function add() {
   const origin = document.getElementById("origin").value;
 
   try {
-    const res = await fetch("http://127.0.0.1:3000/add", {
+    const res = await fetch("https://blockchaintest.onrender.com/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -70,7 +70,7 @@ async function add() {
     document.getElementById("kq").innerText = text;
 
     // tạo QR
-    const url = "http://127.0.0.1:3000/product/0";
+    const url = "https://blockchaintest.onrender.com/add";
     document.getElementById("qr").innerHTML = "";
     QRCode.toCanvas(document.createElement("canvas"), url, function (err, canvas) {
       document.getElementById("qr").appendChild(canvas);
