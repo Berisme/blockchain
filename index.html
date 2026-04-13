@@ -1,6 +1,21 @@
-<script>
-let currentId = 0;
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Test</title>
+</head>
+<body>
 
+<h2>Test thêm sản phẩm</h2>
+
+<input id="name" placeholder="Tên"><br><br>
+<input id="origin" placeholder="Nguồn gốc"><br><br>
+
+<button onclick="add()">Thêm</button>
+
+<p id="kq"></p>
+
+<script>
 async function add() {
   const name = document.getElementById("name").value;
   const origin = document.getElementById("origin").value;
@@ -17,19 +32,11 @@ async function add() {
     const text = await res.text();
     document.getElementById("kq").innerText = text;
 
-    // tạo QR đúng sản phẩm
-    const url = window.location.origin + "/product/" + currentId;
-
-    document.getElementById("qr").innerHTML = "";
-
-    QRCode.toCanvas(document.createElement("canvas"), url, function (err, canvas) {
-      document.getElementById("qr").appendChild(canvas);
-    });
-
-    currentId++;
-
   } catch (err) {
     document.getElementById("kq").innerText = "Lỗi kết nối server!";
   }
 }
 </script>
+
+</body>
+</html>
