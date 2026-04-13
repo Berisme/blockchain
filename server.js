@@ -1,15 +1,23 @@
 const express = require("express");
+const path = require("path");
+
 const app = express();
 
+// middleware
 app.use(express.json());
 
+// cho phép load file HTML
+app.use(express.static(__dirname));
+
+// dữ liệu giả (demo)
 let products = [];
 
+// 👉 TRANG CHỦ (HIỂN THỊ index.html)
 app.get("/", (req, res) => {
-  res.send("Backend dang chay tren Render");
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
-// thêm sản phẩm
+// 👉 THÊM SẢN PHẨM
 app.post("/add", (req, res) => {
   const { name, origin } = req.body;
 
@@ -22,7 +30,7 @@ app.post("/add", (req, res) => {
   res.send("Them san pham thanh cong!");
 });
 
-// lấy sản phẩm
+// 👉 LẤY SẢN PHẨM
 app.get("/product/:id", (req, res) => {
   const p = products[req.params.id];
 
@@ -31,13 +39,6 @@ app.get("/product/:id", (req, res) => {
   res.json(p);
 });
 
-app.listen(3000);
-const path = require("path");
-
-// cho phép dùng file tĩnh
-app.use(express.static(__dirname));
-
-// route trang web
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
-});
+// chạy server (QUAN TRỌNG cho Render)
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log("Server running"));
